@@ -3,6 +3,8 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-introduction-and-goals]]
 == Introduction and Goals
 
+This is a change during the lab...
+
 ifdef::arc42help[]
 [role="arc42help"]
 ****
