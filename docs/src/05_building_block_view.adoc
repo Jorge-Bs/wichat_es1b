@@ -11,7 +11,7 @@ La vista por bloques muestra como se descompone el contexto general del sistema 
 
 image::05_VistaBloques_Whitebox.png[]
 
-Motivation::
+Motivación::
 WIChat es la estructura general del sistema, donde los usuarios se registran, participan en el juego o visualizan su historial de partidas, entre otras funcionalidades.
 
 .Bloques de construcción contenidos
@@ -28,7 +28,7 @@ WIChat es la estructura general del sistema, donde los usuarios se registran, pa
 
 image::05_VistaBloques_Nivel2.png[]
 
-Motivation::
+Motivación::
 Muestra el funcionamiento interno de la aplicación y el flujo de datos entre la WebApp, los Microservicios, la Base de Datos y Wikidata.
 
 .Bloques de construcción contenidos
@@ -43,11 +43,11 @@ Muestra el funcionamiento interno de la aplicación y el flujo de datos entre la
 | Wikidata | API que genera la información de las preguntas y la proporciona al sistema.
 |===
 
-=== Level 3
+=== Nivel 3
 
 image::05_VistaBloques_Nivel3.png[]
 
-Motivation::
+Motivación::
 Muestra el funcionamiento interno de la aplicación y el flujo de datos entre la WebApp, los Microservicios, la Base de Datos y Wikidata.
 
 .Bloques de construcción contenidos
@@ -58,6 +58,10 @@ Muestra el funcionamiento interno de la aplicación y el flujo de datos entre la
 | WIChat | Sistema desarrollado para el uso de los espectadores/usuarios.
 | WebApp | Contiene la interfaz de usuario y la rama de desarrollo (frontend y backend respectivamente).
 | Microservicios | Servicios que se encargan de las funcionalidades del sistema.
+| AuthService | Gestiona la autenticación de usuarios (inicio de sesión).
+| UserService | Gestiona la creación de nuevos usuarios.
+| HistoryService | Gestiona el historial de los usuarios.
+| QuestionService | Gestiona la creación de las preguntas.
 | Base de Datos | Base de datos que almacena la información sobre los usuarios y las preguntas.
 | Wikidata | API que genera la información de las preguntas y la proporciona al sistema.
 |===
