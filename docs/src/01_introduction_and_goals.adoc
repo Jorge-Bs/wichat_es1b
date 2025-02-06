@@ -69,7 +69,11 @@ A table with quality goals and concrete scenarios, ordered by priorities
 ****
 endif::arc42help[]
 
+<<<<<<< Updated upstream
 === Stakeholders
+=======
+=== Partes interesadas (Stakeholders)
+>>>>>>> Stashed changes
 
 ifdef::arc42help[]
 [role="arc42help"]
