@@ -1,13 +1,13 @@
 ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-quality-scenarios]]
-== Quality Requirements
+== Requisitos de calidad
 
-=== Quality Tree
+=== Árbol de calidad
 
 image::arbol_de_calidad.png[Árbol de calidad]
 
-=== Quality Scenarios
+=== Escenarios de calidad
 
 [cols="1,4,1"]
 |===
