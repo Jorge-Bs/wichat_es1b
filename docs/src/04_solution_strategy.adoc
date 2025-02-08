@@ -1,34 +1,33 @@
 ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-solution-strategy]]
-== Solution Strategy
+== Estrategia de solución
 
 
-ifdef::arc42help[]
-[role="arc42help"]
-****
-.Contents
-A short summary and explanation of the fundamental decisions and solution strategies, that shape system architecture. It includes
-
-* technology decisions
-* decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern
-* decisions on how to achieve key quality goals
-* relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.
-
-.Motivation
-These decisions form the cornerstones for your architecture. They are the foundation for many other detailed decisions or implementation rules.
-
-.Form
-Keep the explanations of such key decisions short.
-
-Motivate what was decided and why it was decided that way,
-based upon problem statement, quality goals and key constraints.
-Refer to details in the following sections.
+=== Decisiones tecnológicas
+* **Git:** Sistema de control de versiones.
+* **GitHub:** Servicio basado en la nube que aloja el sistema de control de versiones, Git.
+* **JavaScript:** Lenguaje de programación interpretado, dialecto del estándar ECMAScript. Se utiliza para crear páginas web dinámicas.
+* **React:** Biblioteca de JavaScript para construir interfaces de usuario.
+* **Node.js:** Entorno de ejecución para JavaScript en el servidor, con alto rendimiento y velocidad, ideal para aplicaciones en tiempo real.
+* **CSS:** Lenguaje de programación gráfico orientado a definir la repesentación de un documento.
+* **MongoDB**: Sistema de bases de datos no relacional, orientada a documentos.
+* **Wikidata:** Base de datos libre, colaborativa y multilingüe que se usara para sacar inforamción para las preguntas.
+* **Modelo largo de lenguaje (LLM):** modelo de inteligencia artificial basado en aprendizaje profundo, diseñado para procesar y generar texto en lenguaje natural.
+* **Docker:** se utiliza para hacer el despliegue de la aplicación.
+* **Maquina Virtual:** por decidir
 
 
-.Further Information
+=== Decisiones sobre cómo alcanzar los objetivos clave de calidad
+* **Rendimiento**: Se buscará minimizar los tiempos de procesamiento de datos y tareas, para así mejorar la experiencia del usuario.
+* **Testeabilidad**: El equipo testeará la aplicacion manual y automáticamente mediante pruebas de cobertura (unitarias e integración), pruebas de aceptación (e2e) y pruebas de carga.
+* **Usabilidad**: La aplicación será clara, intuitiva y familiar para el usuario.   
+* **Mantenibilidad**: La aplicación será mantenible gracias al diseño por componentes, lo que nos permitirá tener un código con baja acoplamiento y alta mucha cohesión, ayudandonos a que realizar cambios sea más sencillo y rápido. La documentación se revisará para tenerla actualizada.
 
-See https://docs.arc42.org/section-4/[Solution Strategy] in the arc42 documentation.
 
-****
-endif::arc42help[]
+=== Decisiones organizativas relevantes
+* Los miembros del equipo mantenemos comunicación a través de WhatsApp y Discord para las dudas que surjan u otras decisiones que haya que tomar entre todos los miembros del equipo.
+* Se realizan reuniones semanales en las que se expone el trabajo realizado, si alguno ha tenido algún problema y se revisarán las tareas que tiene cada miembro del equipo.
+* Utilizamos un tablero Kanban dentro de GitHub para organizar las tareas que cada miembro del equipo tiene que realizar/está realizando.
+
+
