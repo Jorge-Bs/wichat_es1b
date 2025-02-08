@@ -74,7 +74,7 @@ endif::arc42help[]
 | **Rendimiento** | Se buscará que los tiempos de espera de la aplicación sean reducidos, para que el usuario pueda disfrutar de una experiencia fluida y con las mínimas interrupciones posibles.
 | **Testeabilidad** | Nuestra aplicación podrá ser testeable, es decir, estará sometida a una serie de pruebas que realizaremos para garantizar el correcto funcionamiento del sistema. También nos ayudará a identificar errores y solucionarlos.
 | **Usabilidad** | La aplicación deberá ser intuitiva y fácil de usar, para que cualquier usuario pueda disfrutar de la experiencia sin necesidad de instrucciones previas. El ojetivo es que el usuario pueda navegar sin dificultades y se sienta cómodo en la aplicación.
-| **Mantenibilidad** | Se tratará de cuidar la arquitectura de la aplicación para futuras nuevas implementaciones, modificaciones o correcciones. Se buscará que el código sea limpio y fácil de entender, para que cualquier miembro del equipo pueda trabajar en él.
+| **Mantenibilidad** | Se tratará de cuidar la arquitectura de la aplicación para futuras nuevas implementaciones, modificaciones o correcciones. Se buscará que el código sea limpio y fácil de entender, para que cualquier miembro del equipo pueda trabajar en él. También se revisará periódicamente la documentación para mantenerla actualizada.
 |===
 
 
