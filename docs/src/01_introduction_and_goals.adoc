@@ -64,29 +64,19 @@ See https://docs.arc42.org/section-1/[Introduction and Goals] in the arc42 docum
 ****
 endif::arc42help[]
 
-=== Quality Goals
 
-ifdef::arc42help[]
-[role="arc42help"]
-****
-.Contents
-The top three (max five) quality goals for the architecture whose fulfillment is of highest importance to the major stakeholders. 
-We really mean quality goals for the architecture. Don't confuse them with project goals.
-They are not necessarily identical.
+=== Objetivos de calidad
 
-Consider this overview of potential topics (based upon the ISO 25010 standard):
 
-image::01_2_iso-25010-topics-EN.drawio.png["Categories of Quality Requirements"]
+[options="header",cols="1,1"]
+|===
+|Objetivo de calidad| Descripción
+| **Rendimiento** | Se buscará que los tiempos de espera de la aplicación sean reducidos, para que el usuario pueda disfrutar de una experiencia fluida y con las mínimas interrupciones posibles.
+| **Testeabilidad** | Nuestra aplicación podrá ser testeable, es decir, estará sometida a una serie de pruebas que realizaremos para garantizar el correcto funcionamiento del sistema. También nos ayudará a identificar errores y solucionarlos.
+| **Usabilidad** | La aplicación deberá ser intuitiva y fácil de usar, para que cualquier usuario pueda disfrutar de la experiencia sin necesidad de instrucciones previas. El ojetivo es que el usuario pueda navegar sin dificultades y se sienta cómodo en la aplicación.
+| **Mantenibilidad** | Se tratará de cuidar la arquitectura de la aplicación para futuras nuevas implementaciones, modificaciones o correcciones. Se buscará que el código sea limpio y fácil de entender, para que cualquier miembro del equipo pueda trabajar en él.
+|===
 
-.Motivation
-You should know the quality goals of your most important stakeholders, since they will influence fundamental architectural decisions. 
-Make sure to be very concrete about these qualities, avoid buzzwords.
-If you as an architect do not know how the quality of your work will be judged...
-
-.Form
-A table with quality goals and concrete scenarios, ordered by priorities
-****
-endif::arc42help[]
 
 === Partes interesadas(Stakeholders)
 
