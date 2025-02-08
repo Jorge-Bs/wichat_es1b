@@ -57,18 +57,23 @@ See https://docs.arc42.org/section-8/[Concepts] in the arc42 documentation.
 ****
 endif::arc42help[]
 
-=== _<Concept 1>_
+=== _Gestión de Proyecto_
 
-_<explanation>_
+* *_Metodología de desarrollo_* 
+
+Se utilizara una metodología agil en el proyecto intentando seguir scrum de la mejor manera posible.
+
+* *_Tareas y proridades_* 
+
+Las tareas y prioridades se gestionaran mediante la una planificación en GitHub y se recogeran en un acta durante cada reunion semanal.
 
 
+=== _Arquitectura y patrones de diseño_
 
-=== _<Concept 2>_
-
-_<explanation>_
+El proyecto sigue una arquitectura de microservicios, que es un patrón de diseño el cual estructura una aplicación como una colección de servicios acoplados de manera flexible. Esto hace que la aplicación sea más escalable y fácil de mantener.
 
 ...
 
-=== _<Concept n>_
+=== _Modelo de dominio_
 
-_<explanation>_
+_Se desarrollara segun la aplicación avance_
