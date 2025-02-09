@@ -10,7 +10,7 @@ o mayor medida la arquitectura o forma final que tendrá el proyecto.
 
 === Restricciones técnicas y estructurales
 |===
-|Restricción | Descripción
+|*Restricción* | *Descripción*
 | Tecnologías a utilizar | La aplicación debe ser desarrollada utilizando las tecnologías React y Node.js.
 | Documentación | La documentación del proyecto debe realizarse utilizando la plantilla Arc42.
 | Control de versiones | El control de versiones se realizará mediante Git y se alojará en GitHub.
