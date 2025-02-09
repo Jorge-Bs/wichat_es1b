@@ -10,7 +10,7 @@ image::../images/07-DeploymentView.png[]
 
 Motivación::
 
-El objetivo de la vista de despliegue es conocer como el producto software se distribuye sobre la infraestructura hardware. Siendo importante conocer su vista por los siguientes motivos:
+El objetivo de la vista de despliegue es conocer cómo el producto software se distribuye sobre la infraestructura hardware. Siendo importante conocer su vista por los siguientes motivos:
 
 * Facilitar la identificación de posibles cuellos de botella y puntos de fallo.
 * Proveer una base para la planificación de la capacidad y la escalabilidad.
