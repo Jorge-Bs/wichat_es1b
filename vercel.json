@@ -42,6 +42,10 @@
     {
       "src": "/webapp/(.*)",
       "dest": "/webapp/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/webapp/index.html"
     }
   ]
 }
