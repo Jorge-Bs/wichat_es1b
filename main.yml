@@ -1,27 +1,36 @@
 name: CI
 
-   on:
-     push:
-       branches:
-         - main
-     pull_request:
-       branches:
-         - main
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
-   jobs:
-     build:
-       runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-       steps:
-       - name: Checkout repository
-         uses: actions/checkout@v2
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-       - name: Set up Docker Buildx
-         uses: docker/setup-buildx-action@v1
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
 
-       - name: Build and push Docker image
-         uses: docker/build-push-action@v2
-         with:
-           context: .
-           push: true
-           tags: user/repo:latest
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: ghcr.io/${{ github.repository }}:latest
+
+    - name: Deploy to Vercel
+      run: |
+        npm install -g vercel
+        vercel login --token ${{ secrets.VERCEL_TOKEN }}
+        vercel --prod
+      env:
+        VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
