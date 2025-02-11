@@ -1,17 +1,25 @@
 {
   "version": 2,
-  "builds": [
+  "projects": [
     {
-      "src": "llmservice/Dockerfile",
-      "use": "@vercel/docker"
+      "name": "llmservice",
+      "src": "llmservice",
+      "builds": [
+        { "src": "llmservice/package.json", "use": "@vercel/node" }
+      ],
+      "routes": [
+        { "src": "/llmservice/(.*)", "dest": "llmservice/$1" }
+      ]
     },
     {
-      "src": "gatewayservice/Dockerfile",
-      "use": "@vercel/docker"
+      "name": "gatewayservice",
+      "src": "gatewayservice",
+      "builds": [
+        { "src": "gatewayservice/package.json", "use": "@vercel/node" }
+      ],
+      "routes": [
+        { "src": "/gatewayservice/(.*)", "dest": "gatewayservice/$1" }
+      ]
     }
-  ],
-  "routes": [
-    { "src": "/llmservice/(.*)", "dest": "/llmservice/$1" },
-    { "src": "/gatewayservice/(.*)", "dest": "/gatewayservice/$1" }
   ]
 }
