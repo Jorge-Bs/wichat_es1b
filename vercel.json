@@ -8,6 +8,10 @@
     {
       "src": "gatewayservice/package.json",
       "use": "@vercel/node"
+    },
+    {
+      "src": "webapp/package.json",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -18,6 +22,10 @@
     {
       "src": "/gatewayservice/(.*)",
       "dest": "gatewayservice/$1"
+    },
+    {
+      "src": "/webapp/(.*)",
+      "dest": "webapp/$1"
     }
   ]
 }
