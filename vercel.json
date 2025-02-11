@@ -1,7 +1,7 @@
-Docker: {
+{
      "version": 2,
      "builds": [
-       { "src": "Dockerfile", "use": "@vercel/docker" }
+       { "src": "docker-compose.yml", "use": "@vercel/docker" }
      ],
      "routes": [
        { "src": "/(.*)", "dest": "/" }
