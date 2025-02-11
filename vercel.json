@@ -2,6 +2,10 @@
   "version": 2,
   "builds": [
     {
+      "src": "webapp/package.json",
+      "use": "@vercel/static-build"
+    },
+    {
       "src": "llmservice/package.json",
       "use": "@vercel/node"
     },
@@ -10,22 +14,38 @@
       "use": "@vercel/node"
     },
     {
-      "src": "webapp/package.json",
+      "src": "users/authservice/package.json",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "users/userservice/package.json",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/llmservice/(.*)",
-      "dest": "llmservice/$1"
+      "dest": "/llmservice/$1"
     },
     {
       "src": "/gatewayservice/(.*)",
-      "dest": "gatewayservice/$1"
+      "dest": "/gatewayservice/$1"
+    },
+    {
+      "src": "/users/authservice/(.*)",
+      "dest": "/users/authservice/$1"
+    },
+    {
+      "src": "/users/userservice/(.*)",
+      "dest": "/users/userservice/$1"
     },
     {
       "src": "/webapp/(.*)",
-      "dest": "webapp/$1"
+      "dest": "/webapp/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/webapp/index.html"
     }
   ]
 }
