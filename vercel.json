@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "llmservice/Dockerfile",
+      "use": "@vercel/docker"
+    },
+    {
+      "src": "gatewayservice/Dockerfile",
+      "use": "@vercel/docker"
+    }
+  ],
+  "routes": [
+    { "src": "/llmservice/(.*)", "dest": "/llmservice/$1" },
+    { "src": "/gatewayservice/(.*)", "dest": "/gatewayservice/$1" }
+  ]
+}
