@@ -1,29 +1,31 @@
 ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-architecture-constraints]]
-== Architecture Constraints
+== Restricciones arquitectónicas
+
+En este apartado se enumerarán y describirán brevemente las restricciones que condicionan las decisiones arquitectónicas
+de la aplicación. Se debe tener en cuenta que, aunque no todas tienen la misma importancia, todas condicionan en menor
+o mayor medida la arquitectura o forma final que tendrá el proyecto.
 
 
-ifdef::arc42help[]
-[role="arc42help"]
-****
-.Contents
-Any requirement that constraints software architects in their freedom of design and implementation decisions or decision about the development process. These constraints sometimes go beyond individual systems and are valid for whole organizations and companies.
-
-.Motivation
-Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
-Constraints must always be dealt with; they may be negotiable, though.
-
-.Form
-Simple tables of constraints with explanations.
-If needed you can subdivide them into
-technical constraints, organizational and political constraints and
-conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
+=== Restricciones técnicas y estructurales
+|===
+|*Restricción* | *Descripción*
+| Tecnologías a utilizar | La aplicación debe ser desarrollada utilizando las tecnologías React y Node.js.
+| Documentación | La documentación del proyecto debe realizarse utilizando la plantilla Arc42.
+| Control de versiones | El control de versiones se realizará mediante Git y se alojará en GitHub.
+| Host | La aplicación será desplegada en un host de Docker.
+| API | Se utilizará una API de WikiData para obtener información a la hora de generar preguntas (distintas fotografías) y respuestas.
+| Base de datos | Se utilizará una base de datos MongoDB para almacenar la información de los usuarios.
+|===
 
 
-.Further Information
+=== Restricciones organizativas y de proceso
+|===
+| Gestión de tareas | Se utilizará la funcionalidad de Github "Github Issues" para asignar y gestionar las tareas de cada miembro del equipo.
+| Reuniones de equipo | Se realizará por lo menos una reunión semanal durante las horas de clase, en nuestro caso los martes de 9 a 11 a.m. en la Escuela de Ingeniería Informática. Además, reuniones extras se podrán llevar a cabo cuando se estime necesario, de forma tanto presencial como telemática.
+| Control de decisiones | En cada reunión, un miembro (el cual se irá rotando) rellenará un acta en el que se recogerán las decisiones tomadas, así como cualquier otra información que sea relevante.
+| División de ramas | Cada componente del equipo trabajará en una rama propia, la cual se fusionará con la rama develop una vez se haya completado la tarea asignada, y  con la rama master una vez se vaya a lanzar una nueva versión revisada de la aplicación.
+|===
 
-See https://docs.arc42.org/section-2/[Architecture Constraints] in the arc42 documentation.
 
-****
-endif::arc42help[]
