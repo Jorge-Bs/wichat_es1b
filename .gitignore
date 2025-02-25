@@ -2,4 +2,8 @@ node_modules
 coverage
 docs/build
 .env
+
 webapp/.env.DS_Store
+webapp/.env
+
+/.idea
