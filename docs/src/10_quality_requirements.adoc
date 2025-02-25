@@ -17,19 +17,19 @@ image::arbol_de_calidad.png[Árbol de calidad]
 | *Prioridad*
 
 | Rendimiento
-| Se buscará que los tiempos de espera de la aplicación sean reducidos, para que el usuario pueda disfrutar de una experiencia fluida y con las mínimas interrupciones posibles.
+| Los tiempos de espera o respuesta de la aplicación sean reducidos, para que el usuario pueda disfrutar de una experiencia fluida y con las mínimas interrupciones posibles. Se buscará que los tiempos sean no superirores a 1 segundo.
 | Medio
 
 | Testeabilidad
-| Nuestra aplicación podrá ser testeable, es decir, estará sometida a una serie de pruebas que realizaremos para garantizar el correcto funcionamiento del sistema. También nos ayudará a identificar errores y solucionarlos.
+| Nuestra aplicación podrá ser testeable, es decir, estará sometida a una serie de pruebas que realizaremos para garantizar el correcto funcionamiento del sistema. El 80% del código tendrá cobertura con pruebas unitarias exitosas. También nos ayudará a identificar errores y solucionarlos. 
 | Medio-Alto
 
 | Usabilidad
-| La aplicación deberá ser intuitiva y fácil de usar, para que cualquier usuario pueda disfrutar de la experiencia sin necesidad de instrucciones previas. El ojetivo es que el usuario pueda navegar sin dificultades y se sienta cómodo en la aplicación.
+| La aplicación deberá ser intuitiva y fácil de usar, para que cualquier usuario pueda disfrutar de la experiencia sin necesidad de instrucciones previas. Se usarán paletas de colores aptas para daltónicos. El ojetivo es que el usuario pueda navegar sin dificultades y se sienta cómodo en la aplicación. Registrase como nuevo usuario será un proceso sencillo y rápido que no requerirá más de 1 minuto.
 | Alto
 
 | Mantenibilidad
-| Se tratará de cuidar la arquitectura de la aplicación para futuras nuevas implementaciones, modificaciones o correcciones. Se buscará que el código sea limpio y fácil de entender, para que cualquier miembro del equipo pueda trabajar en él. También se revisará periódicamente la documentación para mantenerla actualizada.
+| Se tratará de cuidar la arquitectura de la aplicación para futuras nuevas implementaciones, modificaciones o correcciones. Se buscará que el código sea limpio y fácil de entender, para que cualquier miembro del equipo pueda trabajar en él. También se revisará periódicamente la documentación para mantenerla actualizada. Se puede añadir una funcionalidad sin modificar más del 10% del código.
 | Medio-Alto
 
 |===

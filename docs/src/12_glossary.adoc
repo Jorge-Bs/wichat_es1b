@@ -8,39 +8,10 @@ ifndef::imagesdir[:imagesdir: ../images]
 |===
 |Término | Definición
 
-| Git
-| Sistema de control de versiones.
-
-| GitHub
-| Servicio basado en la nube que aloja el sistema de control de versiones, Git.
-
-| Wikidata
-| Web de dónde se sacará la información para las preguntas.
-
-| JavaScript
-| Lenguaje de programación interpretado, dialecto del estándar ECMAScript. Se utiliza para crear páginas web dinámicas.
-
-| React
-| Biblioteca de JavaScript para construir interfaces de usuario.
-
-| Node.js
-| Entorno de ejecución para JavaScript en el servidor, con alto rendimiento y velocidad, ideal para aplicaciones en tiempo real.
-
-| CSS
-| Cascading Style Sheets. Lenguaje de diseño gráfico para definir y crear la presentación de un documento.
-
-| MongoDB
-| Sistema de bases de datos no relacional, orientada a documentos.
-
-| Docker
-| Herramienta para realizar el despliegue de la aplicación.
-
 | API
 | Application Programming Interface. Conjunto de reglas y especificaciones que las aplicaciones pueden usar para comunicarse entre sí.
 
-| Draw.io
-| Herramienta para realizar diagramas.
+| LLM
+| Large Language Model. Es un modelo de IA poderoso que aprende del lenguaje humano y puede usarse en diversas aplicaciones para generar y comprender texto.
 
-| Plantilla Arc42
-| Estructura para documentar sistemas de software
 |===
