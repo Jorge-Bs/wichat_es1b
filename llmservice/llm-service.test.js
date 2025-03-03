@@ -14,8 +14,12 @@ describe('LLM Service', () => {
   axios.post.mockImplementation((url, data) => {
     if (url.startsWith('https://generativelanguage')) {
       return Promise.resolve({ data: { candidates: [{ content: { parts: [{ text: 'llmanswer' }] } }] } });
-    } else if (url.startsWith('https://empathyai')) {
-      return Promise.resolve({ data: { answer: 'llmanswer' } });
+    } else if (url.startsWith('https://ai-challenge.empathy.ai')) {
+      return Promise.resolve({
+        data: {
+          choices: [{ message: { content: 'llmanswer' } }]
+        }
+      });
     }
   });
 
