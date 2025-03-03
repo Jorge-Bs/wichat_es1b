@@ -3,25 +3,25 @@ const express = require('express');
 
 const app = express();
 const port = 8003;
-
+var moderation = "You are a helpful assistant.";
 // Middleware to parse JSON in request body
 app.use(express.json());
 
 // Define configurations for different LLM APIs
 const llmConfigs = {
-  gemini: {
+/*  gemini: {
     url: (apiKey) => `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
     transformRequest: (question) => ({
       contents: [{ parts: [{ text: question }] }]
     }),
     transformResponse: (response) => response.data.candidates[0]?.content?.parts[0]?.text
-  },
+  },*/
   empathy: {
     url: () => 'https://empathyai.staging.empathy.co/v1/chat/completions',
-    transformRequest: (question) => ({
+    transformRequest: (question,moderation) => ({
       model: "qwen/Qwen2.5-Coder-7B-Instruct",
       messages: [
-        { role: "system", content: "You are a helpful assistant." },
+        { role: "system", content: moderation },
         { role: "user", content: question }
       ]
     }),
@@ -43,15 +43,15 @@ function validateRequiredFields(req, requiredFields) {
 }
 
 // Generic function to send questions to LLM
-async function sendQuestionToLLM(question, apiKey, model = 'gemini') {
+async function sendQuestionToLLM(question, apiKey, moderation) {
   try {
-    const config = llmConfigs[model];
+    const config = llmConfigs[0];
     if (!config) {
-      throw new Error(`Model "${model}" is not supported.`);
+      throw new Error(`Model is not supported.`);
     }
 
     const url = config.url(apiKey);
-    const requestData = config.transformRequest(question);
+    const requestData = config.transformRequest(question, moderation);
 
     const headers = {
       'Content-Type': 'application/json',
@@ -68,13 +68,17 @@ async function sendQuestionToLLM(question, apiKey, model = 'gemini') {
   }
 }
 
+app.post('/configureAssistant', async(req,res)=>{
+  moderation = req.body;
+});
+
 app.post('/ask', async (req, res) => {
   try {
     // Check if required fields are present in the request body
     validateRequiredFields(req, ['question', 'model', 'apiKey']);
 
-    const { question, model, apiKey } = req.body;
-    const answer = await sendQuestionToLLM(question, apiKey, model);
+    const { question, apiKey } = req.body;
+    const answer = await sendQuestionToLLM(question, apiKey, moderation);
     res.json({ answer });
 
   } catch (error) {
