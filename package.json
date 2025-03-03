@@ -1,0 +1,36 @@
+{
+  "name": "wichat_es1b",
+  "version": "1.0.0",
+  "description": "[![Actions Status](https://github.com/arquisoft/wichat_es1b/workflows/CI%20for%20wichat_es1b/badge.svg)](https://github.com/arquisoft/wichat_es1b/actions)\r [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wichat_es1b&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wichat_es1b)\r [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wichat_es1b&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wichat_es1b)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arquisoft/wichat_es1b.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Arquisoft/wichat_es1b/issues"
+  },
+  "homepage": "https://github.com/Arquisoft/wichat_es1b#readme",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "express-prom-bundle": "^8.0.0",
+    "jest": "^29.7.0",
+    "mongodb-memory-server": "^10.1.3",
+    "mongoose": "^8.9.3",
+    "supertest": "^7.0.0",
+    "swagger-ui-express": "^5.0.1"
+  }
+}

@@ -8,9 +8,9 @@ const bodyParser = require('body-parser');
 
 
 // Constantes
-const {queries} = require('./question-queries'); //TODO: poner nombre archivo queries (Pablo)
+const {queries:imagesQueries} = require('./question-queries');
 const app = express();
-const generatorEndpoint = "http://localhost:3000";
+const generatorEndpoint = process.env.REACT_APP_API_ORIGIN_ENDPOINT  || "http://localhost:3000";
 const port = 8004;
 const wikiURL = "https://query.wikidata.org/sparql";
 const nOptions = 4;
@@ -26,15 +26,17 @@ var questionToSave = null;
 var gameQuestions = [];
 var randomQuery;
 var randomIndexes = [];
-var queriesByCategory = [];
-var currentNumberOfQuestions = 0;
+var queries = [];
+var currentNumberOfQuestions = 2;
+var language = "es";
+var queriesAndQuestions = getQueriesAndQuestions(imagesQueries); // almacena las queries y las preguntas
 
 
 const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/questions';
 mongoose.connect(mongoURI);
 
 //Posibles categorías para las preguntas, sujeto a cambios
-//const questions = ["¿Cuál es el lugar de la imagen?", "¿Qué es este objeto?", "¿Quién es esta persona?"]
+//const questions = ["¿Cuál es el lugar de la imagen?", "¿Qué monumento es este?", "¿Cuál es el nombre de este futbolista?"]
 
 
 
@@ -56,10 +58,17 @@ app.use((req, res, next) => {
 
 app.get('/generateQuestion', async (req, res) => {
     try {
-        gameQuestions = [];
+        console.log("Servicio  preguntas");
+        //gameQuestions = [];
+        queries = [];
+        questions = [];
+        if(currentNumberOfQuestions == 0){
+            gameId = null;
+        }
 
-        const user = req.query.user;
-        await getQueriesByCategory(req.query.category);
+        //const user = req.query.user;
+        await getQueriesByCategory("Geografia");
+        console.log("Generando pregunta...");
         await generateQuestion();
 
         currentNumberOfQuestions++;
@@ -67,7 +76,7 @@ app.get('/generateQuestion', async (req, res) => {
             currentNumberOfQuestions = 0;
         }
         var id = await saveData();
-        await saveGame(user, id);
+        //await saveGame(user, id);
 
         // Construir la response
         var response = {
@@ -77,6 +86,7 @@ app.get('/generateQuestion', async (req, res) => {
             responseImage: image,
             question_Id: id
         }
+        console.log("Pregunta generada: "+ question);
 
         res.status(200).json(response); //OK
     }
@@ -106,15 +116,53 @@ app.post('/configureGame', async (req, res) => {
 
 
 
-
+// Carga de las queries según la categoría
 async function getQueriesByCategory(category) {
-    //TODO
-    queriesByCategory = queries;
+    if(category == "Geografia") {
+        changeQueriesAndQuestions("Geografia");
+    } else if(category == "Cultura") {
+        changeQueriesAndQuestions("Cultura");
+    } else if(category == "Personajes") {
+        changeQueriesAndQuestions("Personajes");
+    } else {
+        queries = getAllValues();
+    }
+}
+
+function changeQueriesAndQuestions(category) {
+    queries = queriesAndQuestions[category];
+    queries = queriesAndQuestions[language];
+}
+
+function getAllValues() {
+    var data = [];
+    for (var category in queriesAndQuestions) {
+        var categoryQueries = queriesAndQuestions[category];
+        if (categoryQueries[language]) {
+            data = data.concat(categoryQueries[language]);
+        }
+    }
+    return data;
 }
 
 
-
-
+// Carga las queries y las preguntas de question-queries.js
+function getQueriesAndQuestions(images) {
+    var data = {};
+    for (var language in images) {
+        var categoryQuery = images[language];
+        for (var category in categoryQuery) {
+            if (!data[category]) {
+                data[category] = {};
+            }
+            if (!data[category][language]) {
+                data[category][language] = [];
+            }
+            data[category][language] = data[category][language].concat(categoryQuery[category]);
+        }
+    }
+    return data;
+}
 
 
 async function generateQuestion() {
@@ -172,9 +220,9 @@ function processData(data) {
     image = data[randomIndexes[correctIndex]].imageLabel.value;
 
     // Mezclar optiones
-    for(let i = 0; i < nOptions; i++) {
-        let optionIndex = randomIndexes[i];
-        let option = data[optionIndex].optionLabel.value;
+    for(var i = 0; i < nOptions; i++) {
+        var optionIndex = randomIndexes[i];
+        var option = data[optionIndex].optionLabel.value;
         options.push(option);
     }
 }
