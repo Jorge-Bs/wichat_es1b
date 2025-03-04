@@ -18,7 +18,11 @@ const Game = () => {
   
   const getQuestion = async () => {
     try {      
-      const response = await axios.get(`${apiEndpoint}/generateQuestion`, { });
+      const response = await axios.get(`${apiEndpoint}/generateQuestion`, { // una vez funcione 
+        // params: {
+        //   category: "Geografia",
+        // }
+      });
       
       setQuestion(response.data.responseQuestion);
       setOptions(response.data.responseOptions);

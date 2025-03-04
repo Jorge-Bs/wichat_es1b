@@ -31,9 +31,9 @@ var currentNumberOfQuestions = 2;
 var language = "es";
 var queriesAndQuestions = getQueriesAndQuestions(imagesQueries); // almacena las queries y las preguntas
 
-
-const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/questions';
-mongoose.connect(mongoURI);
+// configurar el puerto para las preguntas (descomentar cuando funcione el servicio)
+// const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/userdb';
+// mongoose.connect(mongoURI);
 
 //Posibles categorías para las preguntas, sujeto a cambios
 //const questions = ["¿Cuál es el lugar de la imagen?", "¿Qué monumento es este?", "¿Cuál es el nombre de este futbolista?"]
