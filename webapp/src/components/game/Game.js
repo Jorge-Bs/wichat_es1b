@@ -62,7 +62,6 @@ const Game = () => {
   return (
 
     <Container maxWidth="md" style={{ marginTop: '2rem' }}>
-        Aquí está el juego
         <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
           {question}
         </Typography>

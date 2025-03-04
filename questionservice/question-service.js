@@ -23,7 +23,7 @@ var question = "";
 var image = "";
 var gameId = null;
 var options = [];
-var maxQuestions = 5; //TODO: definir cantidad de preguntas por partida
+var maxQuestions = 5;
 var questionToSave = null;
 var gameQuestions = [];
 var randomQuery;
@@ -37,7 +37,7 @@ var queries = [
         OPTIONAL { ?option wdt:P18 ?imageLabel. }    
         FILTER(lang(?optionLabel) = "es")       
         FILTER EXISTS { ?option wdt:P18 ?imageLabel }
-      } LIMIT 50`,  
+      } LIMIT 50`,
     `SELECT ?option ?optionLabel ?imageLabel
       WHERE {
         ?option wdt:P31 wd:Q4989906; 
@@ -45,7 +45,7 @@ var queries = [
                   wdt:P18 ?imageLabel.                  
         SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es". }
       }
-      LIMIT 50`,  
+      LIMIT 50`,
     `SELECT ?optionLabel ?imageLabel
       WHERE {
         ?option wdt:P106 wd:Q937857;     
@@ -60,15 +60,10 @@ var currentNumberOfQuestions = 2;
 var language = "es";
 var queriesAndQuestions = getQueriesAndQuestions(imagesQueries); // almacena las queries y las preguntas
 
-// configurar el puerto para las preguntas (descomentar cuando funcione el servicio)
-// const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/userdb';
-// mongoose.connect(mongoURI);
 
-//Posibles categorías para las preguntas, sujeto a cambios
-//const questions = ["¿Cuál es el lugar de la imagen?", "¿Qué monumento es este?", "¿Cuál es el nombre de este futbolista?"]
 
 var possiblesQuestions = ["¿Cuál es el lugar de la imagen?", "¿Qué monumento es este?", "¿Cuál es el nombre de este futbolista?"];
-var categorys = ["Geografia", "Cultura", "Personajes"];
+var categories = ["Geografia", "Cultura", "Personajes"];
 var questionObject = "";
 var correctAnswer = "";
 var answerOptions = [];
@@ -80,21 +75,20 @@ function getQuestionData(data) {
     var fourRows = [];
     const nElems = data.length;
 
-      // Select 4 random rows of the data
+    // Select 4 random rows of the data
     for (let i = 0; i<numberOfOptions; i++){
-        //let indexRow = Math.floor(Math.random() * numEles);
         let indexRow = crypto.randomInt(0, nElems);
-        if(data[indexRow].optionLabel.value.startsWith('Q')){    // añadir mas comprobaciones 
+        if(data[indexRow].optionLabel.value.startsWith('Q')){    // añadir mas comprobaciones
             i = i - 1;
         }else{
-        fourRows.push(data[indexRow]);
-        // Store the 4 posible answers
-        answerOptions.push(data[indexRow].optionLabel.value);
+            fourRows.push(data[indexRow]);
+            // Store the 4 posible answers
+            answerOptions.push(data[indexRow].optionLabel.value);
         }
     }
 
     var indexQuestion = crypto.randomInt(0,numberOfOptions);
-    // Store the country choosen and its capital
+    // Store the country chosen and its capital
     questionObject= possiblesQuestions[randomQuery];
     questionImage = fourRows[indexQuestion].imageLabel.value;
     correctAnswer = fourRows[indexQuestion].optionLabel.value;
@@ -102,7 +96,7 @@ function getQuestionData(data) {
 }
 
 
-app.get('/generateQuestion', async (req, res) => { 
+app.get('/generateQuestion', async (req, res) => {
     randomQuery = crypto.randomInt(0, queries.length);
     console.log("Selected Query: " + randomQuery);
     const apiUrl = `https://query.wikidata.org/sparql?query=${encodeURIComponent(queries[randomQuery])}&format=json`;
@@ -110,9 +104,9 @@ app.get('/generateQuestion', async (req, res) => {
     try {
         // Makes the petition to the url
         const response = await axios(apiUrl, {
-        headers: {
-            'Accept': 'application/json'
-        }
+            headers: {
+                'Accept': 'application/json'
+            }
         });
 
         console.log("📢 Respuesta completa de Wikidata:", JSON.stringify(response.data, null, 2));
@@ -122,13 +116,13 @@ app.get('/generateQuestion', async (req, res) => {
             return res.status(400).json({ error: 'La consulta no devolvió resultados' });
         }
 
-        // Parse the response 
+        // Parse the response
         //const data = await response.json();
 
         // Send the parsed response to be selected
         getQuestionData(response.data.results.bindings);
 
-        // Declare what will be return 
+        // Declare what will be return
         solution = {
             responseQuestion : questionObject,
             responseCorrectAnswer : correctAnswer,
@@ -137,8 +131,8 @@ app.get('/generateQuestion', async (req, res) => {
         };
 
         //saveQuestion();
-        
-        // Return the resoult with a 200 status
+
+        // Return the result with a 200 OK status
         res.status(200).json(solution);
     } catch (error) {
         console.error('Error al realizar la consulta:', error);
@@ -163,46 +157,6 @@ app.use((req, res, next) => {
 
 
 
-
-// app.get('/generateQuestion', async (req, res) => {
-//     try {
-//         console.log("Servicio  preguntas");
-//         //gameQuestions = [];
-//         queries = [];
-//         questions = [];
-//         if(currentNumberOfQuestions == 0){
-//             gameId = null;
-//         }
-
-//         //const user = req.query.user;
-//         await getQueriesByCategory("Geografia");
-//         console.log("Generando pregunta...");
-//         await generateQuestion();
-//         console.log("Pregunta generada");
-
-//         currentNumberOfQuestions++;
-//         if(currentNumberOfQuestions >= maxQuestions) {
-//             currentNumberOfQuestions = 0;
-//         }
-//         var id = await saveData();
-//         //await saveGame(user, id);
-
-//         // Construir la response
-//         var response = {
-//             responseQuestion: question,
-//             responseOptions: options,
-//             responseCorrectOption: correct,
-//             responseImage: image,
-//             question_Id: id
-//         }
-//         console.log("Pregunta generada: "+ question);
-
-//         res.status(200).json(response); //OK
-//     }
-//     catch(error) {
-//         res.status(400).json({error: error.message}); //Error: bad request client error
-//     }
-// })
 
 
 /**
@@ -257,18 +211,6 @@ function getAllValues() {
 // Carga las queries y las preguntas de question-queries.js
 function getQueriesAndQuestions(images) {
     var data = {};
-    // for (var language in images) {
-    //     var categoryQuery = images[language];
-    //     for (var category in categoryQuery) {
-    //         if (!data[category]) {
-    //             data[category] = {};
-    //         }
-    //         if (!data[category][language]) {
-    //             data[category][language] = [];
-    //         }
-    //         data[category][language] = data[category][language].concat(categoryQuery[category]);
-    //     }
-    // }
     for (var language in images) {
         if (!data[language]) {
             data[language] = {};
@@ -285,31 +227,6 @@ function getQueriesAndQuestions(images) {
 }
 
 
-async function generateQuestion() {
-    randomQuery = crypto.randomInt(0, 2); //Número para usar en el processData
-
-    try {
-       randomQuery = crypto.randomInt(0, queries.length); //Escoger una query aleatoria entre las cargadas.
-
-        var response = await axios.get(wikiURL,
-            {
-                params: {
-                    query: queries[randomQuery][0],
-                    format: 'json'
-                },
-
-                headers: {
-                    'Accept': 'application/sparql-results+json' // Aceptar resultados de la consulta a wikidata
-                }
-            });
-
-        processData(response.data);
-    }
-    catch(error) {
-        console.error("Error in generateQuestion: " + error);
-        throw new Error("Error al generar la pregunta: " + error);
-    }
-}
 
 function processData(data) {
 
@@ -339,7 +256,7 @@ function processData(data) {
     question = queries[0][1];
     image = data[randomIndexes[correctIndex]].imageLabel.value;
 
-    // Mezclar optiones
+    // Mezclar opciones
     for(var i = 0; i < nOptions; i++) {
         var optionIndex = randomIndexes[i];
         var option = data[optionIndex].optionLabel.value;
@@ -369,56 +286,6 @@ async function saveData() {
     }
     catch(error) {
         console.error("Error while saving a new question: " + error);
-    }
-}
-
-
-
-async function saveGame(username, id) {
-    if (gameId === null) {
-        try {
-            const newGame = new Game({playerId: username, questions: []});
-            newGame.questions.push(questionToSave._id);
-            await newGame.save();
-
-            gameId = newGame._id;
-
-            return null;
-        }
-        catch(error) {
-            console.error("Error guardando los datos de la partida: " + error)
-        }
-    }
-    else {
-        const existingGame = await Game.findById(gameId);
-
-        if(!existingGame) { // No existingGame
-            try {
-                const newGame = new Game({playerId: username, questions: []});
-                newGame.questions.push(questionToSave._id);
-                await newGame.save();
-
-                gameId = newGame._id;
-
-                return null;
-            }
-            catch(error) {
-                console.error("Error guardando los datos de la partida: " + error)
-            }
-        }
-        else { //Ya hay existingGame
-            try {
-                existingGame.questions.push(questionToSave._id);
-                await existingGame.save();
-
-                gameId = existingGame._id;
-
-                return null;
-            }
-            catch(error) {
-                console.error("Error guardando los datos de la partida: " + error)
-            }
-        }
     }
 }
 
