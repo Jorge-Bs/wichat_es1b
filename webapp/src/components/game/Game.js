@@ -14,7 +14,7 @@ const Game = () => {
   const [question, setQuestion] = useState('');
   const [image, setImage] = useState('');
   const [options, setOptions] = useState([]);
-  const [correctOption, setCorrectOption] = useState("");
+  const [correctAnswer, setCorrectAnswer] = useState("");
   
   const getQuestion = async () => {
     try {      
@@ -25,13 +25,13 @@ const Game = () => {
       });
       
       setQuestion(response.data.responseQuestion);
-      setOptions(response.data.responseOptions);
-      setCorrectOption(response.data.responseCorrectOption);
-      setImage(response.data.responseImage);
+      setOptions(response.data.responseAnswerOptions);
+      setCorrectAnswer(response.data.responseCorrectAnswer);
+      setImage(response.data.responseQuestionImage);
       console.log(response.data.responseQuestion);
-      console.log(response.data.responseOptions);
-      console.log(response.data.responseCorrectOption);
-      console.log(response.data.responseImage);
+      console.log(response.data.responseAnswerOptions);
+      console.log(response.data.responseCorrectAnswer);
+      console.log(response.data.responseQuestionImage);
     } catch (error) {
       console.log("Error: " );
     }
@@ -40,11 +40,12 @@ const Game = () => {
 
   useEffect(() => {
     getQuestion();
-  }, [getQuestion]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleOptionClick = async (option) => {
 
-    if(correctOption === option){
+    if(correctAnswer === option){
       console.log("Correcto");
     } else {
       console.log("Incorrecto");
@@ -54,7 +55,7 @@ const Game = () => {
       getQuestion();
     }, 3000);
     
-    
+
   };
 
 
