@@ -10,9 +10,17 @@ const YAML = require('yaml')
 const app = express();
 const port = 8000;
 
+//const originEndpoint = REACT_APP_API_ORIGIN_ENDPOINT || 'http://localhost:3000';
 const llmServiceUrl = process.env.LLM_SERVICE_URL || 'http://localhost:8003';
 const authServiceUrl = process.env.AUTH_SERVICE_URL || 'http://localhost:8002';
 const userServiceUrl = process.env.USER_SERVICE_URL || 'http://localhost:8001';
+const questionsServiceUrl = process.env.QUESTION_SERVICE_URL || 'http://localhost:8004';
+
+// const corsOptions = {
+//   origin: `${originEndpoint}`, 
+//   methods: ['GET', 'POST'], 
+//   allowedHeaders: ['Content-Type', 'Authorization'] 
+// };
 
 app.use(cors());
 app.use(express.json());
@@ -55,6 +63,37 @@ app.post('/askllm', async (req, res) => {
     res.status(error.response.status).json({ error: error.response.data.error });
   }
 });
+
+
+app.get('/generateQuestion', async (req, res) => {
+  try {
+    //Mandar al endpoint del servicio de preguntas para que gestione la petición, con los parámetros añadidos
+    //const URL = questionsServiceUrl + 'generateQuestion?user=' + req.query.user + '&category=' + req.query.category;   //codigo completo
+    const URL = questionsServiceUrl + '/generateQuestion'; // + '?category=' + req.query.category;     //codigo de prueba
+    //console.log("Category" + req.query.category);
+    const response = await axios.get(URL);
+    console.log("URL: "+ URL);
+    res.json(response.data);
+    console.log("Pregunta generada: "+ response.data.responseQuestion);
+  }
+  catch(error) {
+    res.status(error.response.status).json({error: error.response.data.error});
+  }
+});
+
+
+app.post('/configureGame', async (req, res) => {
+  try {
+    const response = await axios.post(questionsServiceUrl + '/configureGame', req.body);
+    res.json(response.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
+
+
+
 
 // Read the OpenAPI YAML file synchronously
 openapiPath='./openapi.yaml'

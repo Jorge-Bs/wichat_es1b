@@ -6,12 +6,12 @@
 // configure EN settings for asciidoc
 include::src/config.adoc[]
 
-= image:arc42-logo.png[arc42] wichat_es1b
+= image:logo.png[logo] image:arc42-logo.png[arc42] Wichat en español - Equipo 1-B
 :revnumber: 8.2 EN
-:revdate: January 2023
+:revdate: February 2025
 :revremark: (based upon AsciiDoc version)
 // toc-title definition MUST follow document title without blank line!
-:toc-title: Table of Contents
+:toc-title: Tabla de contenidos
 
 //additional style for arc42 help callouts
 ifdef::backend-html5[]
