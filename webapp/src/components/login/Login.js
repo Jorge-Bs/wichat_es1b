@@ -42,7 +42,7 @@ const Login = () => {
       setOpenSnackbar(true);
       navigate("/Home");
     } catch (error) {
-      setError('Error: Credenciales inválidas');
+      setError(' Credenciales inválidas');
     }
   };
 
