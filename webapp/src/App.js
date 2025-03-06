@@ -17,7 +17,7 @@ function App() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
-          ¡Te damos la bienvenida a <b>Wichat</b>! ¡Esperamos que disfrutes!
+          ¡Te damos la bienvenida a Wichat! ¡Esperamos que disfrutes!
       </Typography>
       {showLogin ? <Login /> : <AddUser />}
       <Typography component="div" align="center" sx={{ marginTop: 2 }}>

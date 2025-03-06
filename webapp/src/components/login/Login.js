@@ -42,7 +42,7 @@ const Login = () => {
       setOpenSnackbar(true);
       navigate("/Home");
     } catch (error) {
-      setError(' Credenciales inválidas');
+      setError('Credenciales inválidas');
     }
   };
 
@@ -61,13 +61,13 @@ const Login = () => {
             typeSpeed={50} // Typing speed in ms
           />
           <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
-            Your account was created on {new Date(createdAt).toLocaleDateString()}.
+            Tu cuenta ha sido creada a las {new Date(createdAt).toLocaleDateString()}.
           </Typography>
         </div>
       ) : (
         <div>
           <Typography component="h1" variant="h5">
-            Login
+            Iniciar sesión
           </Typography>
           <TextField
             margin="normal"
@@ -85,9 +85,9 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button variant="contained" color="primary" onClick={loginUser}>
-            Login
+            Iniciar sesión
           </Button>
-          <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="Login successful" />
+          <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="Inicio de sesión exitoso" />
           {error && (
             <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />
           )}
