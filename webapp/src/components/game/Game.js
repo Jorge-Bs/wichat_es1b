@@ -5,6 +5,9 @@ import { useNavigate } from 'react-router-dom';
 
 import './Game.css';
 
+import './../chatbot/chat.jsx';
+import Chat from "../chatbot/chat";
+
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -78,7 +81,8 @@ const Game = () => {
               {option}
             </Button>
           ))}
-          </div>
+        </div>
+      <Chat>{correctAnswer}</Chat>
     </Container>
   );
 

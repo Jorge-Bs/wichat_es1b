@@ -1,4 +1,4 @@
-import Icon from "../../webapp/public/chat.png?react";
+import Icon from "./chat.png?react";
 
 const settings = {
     general: {
@@ -9,7 +9,7 @@ const settings = {
     botBubble: { simStream: true },
     tooltip: {
         mode: "CLOSE",
-        text: "Estoy aqui para ayudarte! 😊",
+        text: "Estoy aquí para ayudarte! 😊",
     },
     chatButton: {
         icon: Icon,
