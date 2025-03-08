@@ -18,6 +18,11 @@ const Game = () => {
   const [image, setImage] = useState('');
   const [options, setOptions] = useState([]);
   const [correctAnswer, setCorrectAnswer] = useState("");
+
+  // Estados para manejar la respuesta seleccionada y su corrección
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [isCorrect, setIsCorrect] = useState(null);
+
   
   const getQuestion = async () => {
     try {      
@@ -35,6 +40,10 @@ const Game = () => {
       console.log(response.data.responseAnswerOptions);
       console.log(response.data.responseCorrectAnswer);
       console.log(response.data.responseQuestionImage);
+
+      // Restablecer la respuesta seleccionada y los colores de los botones
+      setSelectedAnswer(null);
+      setIsCorrect(null);
     } catch (error) {
       console.log("Error: " );
     }
@@ -45,43 +54,50 @@ const Game = () => {
     getQuestion();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
+  const handleOptionClick = (option) => {
+    setSelectedAnswer(option); // Guarda la opción seleccionada
+    setIsCorrect(option === correctAnswer); // Verifica si es correcta
 
-  const handleOptionClick = async (option) => {
-
-    if(correctAnswer === option){
-      console.log("Correcto");
-    } else {
-      console.log("Incorrecto");
-    }
-
+    // Espera 2 segundos antes de cargar una nueva pregunta
     setTimeout(() => {
       getQuestion();
-    }, 3000);
-    
-
+    }, 2000);
   };
 
 
   return (
-
     <Container maxWidth="md" style={{ marginTop: '2rem' }}>
-        <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
-          {question}
-        </Typography>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          {image !== null && image !== "" && <img src={image} alt="Imagen de la pregunta" width="40%" height="auto"/>}
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', alignItems: 'center', marginTop: '20px' }}>
-          {options.map((option, index) => (
-            <Button
-              key={index}
-              variant="contained"
-              onClick={() => handleOptionClick(option)}
-            >
-              {option}
-            </Button>
-          ))}
-        </div>
+      <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
+        {question}
+      </Typography>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        {image && <img src={image} alt="Imagen de la pregunta" width="40%" height="auto" />}
+      </div>
+      <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(2, 1fr)', 
+          gap: '10px', 
+          alignItems: 'center', 
+          marginTop: '20px' 
+        }}>
+        {options.map((option, index) => (
+          <Button
+            key={index}
+            variant="contained"
+            onClick={() => handleOptionClick(option)}
+            style={{
+              backgroundColor: selectedAnswer === option 
+                ? (isCorrect ? 'green' : 'red') 
+                : '', // Se restablece el color cuando cambia la pregunta
+              color: selectedAnswer === option ? 'white' : 'black'
+            }}
+            disabled={selectedAnswer !== null} // Deshabilita los botones tras hacer clic
+          >
+            {option}
+          </Button>
+        ))}
+      </div>
       <Chat>{correctAnswer}</Chat>
     </Container>
   );

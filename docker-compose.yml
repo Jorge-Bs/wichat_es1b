@@ -95,6 +95,9 @@ services:
       - gatewayservice
     ports:
       - "3000:3000"
+    volumes:
+      - ./webapp:/usr/src/app  # <-- Esto montará el código local dentro del contenedor
+      - /usr/src/app/node_modules  # <-- Evita problemas con node_modules dentro del volumen
 
   prometheus:
     image: prom/prometheus
