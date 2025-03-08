@@ -77,7 +77,7 @@ const Game = () => {
   // Finalizar partida
   const handleEndGame = () => {
     //console.log("Partida finalizada");
-    // Falta añdir lógica
+    // Falta añadir lógica
   };
   
   // Iniciar nueva partida
@@ -104,7 +104,7 @@ const Game = () => {
           <Button color="inherit" onClick={handleGoToProfile}>Ir al perfil</Button>
         </Toolbar>
       </AppBar>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '20px', marginBottom: '20px' }}>
         <Typography variant="h6" sx={{ marginLeft: '20px' }}>
           {question}
         </Typography>
@@ -120,7 +120,8 @@ const Game = () => {
           gridTemplateColumns: 'repeat(2, 1fr)', 
           gap: '10px', 
           alignItems: 'center', 
-          marginTop: '20px' 
+          marginTop: '20px',
+          marginBottom: '20px'
         }}>
         {options.map((option, index) => (
           <Button
@@ -130,8 +131,8 @@ const Game = () => {
             style={{
               backgroundColor: selectedAnswer === option 
                 ? (isCorrect ? 'green' : 'red') 
-                : '', // Se restablece el color cuando cambia la pregunta
-              color: selectedAnswer === option ? 'white' : 'black'
+                : (selectedAnswer !== null && option === correctAnswer ? 'green' : ''), // Si se falla, también se muestra cual era la correcta
+              color: selectedAnswer === option || (selectedAnswer !== null && option === correctAnswer) ? 'white' : 'black'
             }}
             disabled={selectedAnswer !== null} // Deshabilita los botones tras hacer clic
           >

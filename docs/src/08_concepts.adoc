@@ -11,7 +11,7 @@ Se utilizara una metodología agil en el proyecto intentando seguir scrum de la 
 
 * *_Tareas y proridades_* 
 
-Las tareas y prioridades se gestionaran mediante la una planificación en GitHub y se recogeran en un acta durante cada reunion semanal.
+Las tareas y prioridades se gestionaran mediante la una planificación en GitHub y se recogerán en un acta durante cada reunion semanal.
 
 
 === _Arquitectura y patrones de diseño_
@@ -21,7 +21,7 @@ El proyecto sigue una arquitectura de microservicios, que es un patrón de dise�
 ...
 
 === _Libreria ChatBotify_
-Libreria encargada de la gestion del chatbot, se encargara de la gestion de las peticiones del usuario y respuestas del chatbot.
+Librería encargada de la gestión del chatbot, se encargará de la gestión de las peticiones del usuario y respuestas del chatbot.
 
 === _Modelo de dominio_
 
