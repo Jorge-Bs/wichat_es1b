@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { Container, Typography, Button} from '@mui/material';
+import { Container, Typography, Button, AppBar, Toolbar} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import './Game.css';
@@ -74,9 +74,36 @@ const Game = () => {
     }, 2000);
   };
 
+  // Finalizar partida
+  const handleEndGame = () => {
+    //console.log("Partida finalizada");
+    // Falta añdir lógica
+  };
+  
+  // Iniciar nueva partida
+  const handleNewGame = () => {
+    console.log("Nueva partida iniciada");
+    setScore(0);  // Reiniciar puntuación
+    getQuestion(); // Cargar nueva pregunta
+  };
+  
+  // Redirigir al perfil del usuario
+  const handleGoToProfile = () => {
+    //navigate('/profile'); 
+  };
+
 
   return (
     <Container maxWidth="md" style={{ marginTop: '2rem' }}>
+      <AppBar position="static" color="primary">
+        <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div>
+            <Button color="inherit" onClick={handleEndGame}>Finalizar partida</Button>
+            <Button color="inherit" onClick={handleNewGame}>Empezar nueva partida</Button>
+          </div>
+          <Button color="inherit" onClick={handleGoToProfile}>Ir al perfil</Button>
+        </Toolbar>
+      </AppBar>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Typography variant="h6" sx={{ marginLeft: '20px' }}>
           {question}
