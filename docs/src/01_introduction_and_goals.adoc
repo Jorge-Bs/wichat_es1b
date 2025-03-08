@@ -15,16 +15,16 @@ El equipo comprometido con este desarrollo está formado por:
 * Pablo Urones Clavera
 
 En la aplicación, los usuarios podrán registrarse y participar en un juego de preguntas.
-Dicho juego consistirá en que la aplicación mostrará una imagen y los jugadores deberán adivinar preguntas sobre el lugar representado. Como novedad de la aplicación, se ofrecerá la posibilidad de obtener pistas sobre la imagen mediante una conversación con un chatbot.
+Dicho juego consistirá en que la aplicación mostrará una imagen y los jugadores deberan adivinar preguntas sobre el lugar representado. Como novedad de la aplicación, se ofrecerá la posibilidad de obtener pistas sobre la imagen mediante una conversación con un chatbot.
 
 
 === Descripción de los requisitos
 
-* Los usuarios deberán registrarse en la aplicación para jugar, o bien iniciar sesión en una cuenta ya existente.
+* Los ususarios deberán registrarse en la aplicación para jugar, o bien iniciar sesión en una cuenta ya existente.
 * Los usuarios registrados podrán acceder a un historial de su participación.
 * La información de las preguntas será generada por el sistema automáticamente basándose en datos extraídos de Wikidata.
-* Cada una de las preguntas tendrá 4 respuestas posibles, siendo solo una respuesta correcta y el resto distractoras o incorrectas.
-* Los usuarios contarán con un plazo de tiempo determinado para responder las preguntas.
+* Cada una de las preguntas tendra 4 respuestas posibles, siendo solo una respuesta correcta y el resto distractoras o incorrectas.
+* Los ususarios contarán con un plazo de tiempo determinado para responder las preguntas.
 
 
 === Objetivos de calidad

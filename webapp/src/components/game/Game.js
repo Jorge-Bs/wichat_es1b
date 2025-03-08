@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { Container, Typography, Button} from '@mui/material';
+import { Container, Typography, Button, AppBar, Toolbar} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import './Game.css';
@@ -18,6 +18,15 @@ const Game = () => {
   const [image, setImage] = useState('');
   const [options, setOptions] = useState([]);
   const [correctAnswer, setCorrectAnswer] = useState("");
+
+  // Estados para manejar la respuesta seleccionada y su corrección
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [isCorrect, setIsCorrect] = useState(null);
+
+  // Estado para manejar contador de preguntas respondidas correctamente
+  const [score, setScore] = useState(0);
+
+
   
   const getQuestion = async () => {
     try {      
@@ -35,6 +44,10 @@ const Game = () => {
       console.log(response.data.responseAnswerOptions);
       console.log(response.data.responseCorrectAnswer);
       console.log(response.data.responseQuestionImage);
+
+      // Restablecer la respuesta seleccionada y los colores de los botones
+      setSelectedAnswer(null);
+      setIsCorrect(null);
     } catch (error) {
       console.log("Error: " );
     }
@@ -45,43 +58,87 @@ const Game = () => {
     getQuestion();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
+  const handleOptionClick = (option) => {
+    setSelectedAnswer(option); // Guarda la opción seleccionada
+    const correct = option === correctAnswer; // Verifica si es correcta
+    setIsCorrect(correct);
 
-  const handleOptionClick = async (option) => {
-
-    if(correctAnswer === option){
-      console.log("Correcto");
-    } else {
-      console.log("Incorrecto");
+    if (correct) {
+      setScore(prevScore => prevScore + 1); // Incrementa el puntaje si es correcto
     }
 
+    // Espera 2 segundos antes de cargar una nueva pregunta
     setTimeout(() => {
       getQuestion();
-    }, 3000);
-    
+    }, 2000);
+  };
 
+  // Finalizar partida
+  const handleEndGame = () => {
+    //console.log("Partida finalizada");
+    // Falta añdir lógica
+  };
+  
+  // Iniciar nueva partida
+  const handleNewGame = () => {
+    console.log("Nueva partida iniciada");
+    setScore(0);  // Reiniciar puntuación
+    getQuestion(); // Cargar nueva pregunta
+  };
+  
+  // Redirigir al perfil del usuario
+  const handleGoToProfile = () => {
+    //navigate('/profile'); 
   };
 
 
   return (
-
     <Container maxWidth="md" style={{ marginTop: '2rem' }}>
-        <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
+      <AppBar position="static" color="primary">
+        <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div>
+            <Button color="inherit" onClick={handleEndGame}>Finalizar partida</Button>
+            <Button color="inherit" onClick={handleNewGame}>Empezar nueva partida</Button>
+          </div>
+          <Button color="inherit" onClick={handleGoToProfile}>Ir al perfil</Button>
+        </Toolbar>
+      </AppBar>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Typography variant="h6" sx={{ marginLeft: '20px' }}>
           {question}
         </Typography>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          {image !== null && image !== "" && <img src={image} alt="Imagen de la pregunta" width="40%" height="auto"/>}
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', alignItems: 'center', marginTop: '20px' }}>
-          {options.map((option, index) => (
-            <Button
-              key={index}
-              variant="contained"
-              onClick={() => handleOptionClick(option)}
-            >
-              {option}
-            </Button>
-          ))}
-        </div>
+        <Typography variant="h6" sx={{ marginRight: '20px', color: 'blue' }}>
+          Puntuación: {score}
+        </Typography>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        {image && <img src={image} alt="Imagen de la pregunta" width="40%" height="auto" />}
+      </div>
+      <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(2, 1fr)', 
+          gap: '10px', 
+          alignItems: 'center', 
+          marginTop: '20px' 
+        }}>
+        {options.map((option, index) => (
+          <Button
+            key={index}
+            variant="contained"
+            onClick={() => handleOptionClick(option)}
+            style={{
+              backgroundColor: selectedAnswer === option 
+                ? (isCorrect ? 'green' : 'red') 
+                : '', // Se restablece el color cuando cambia la pregunta
+              color: selectedAnswer === option ? 'white' : 'black'
+            }}
+            disabled={selectedAnswer !== null} // Deshabilita los botones tras hacer clic
+          >
+            {option}
+          </Button>
+        ))}
+      </div>
       <Chat>{correctAnswer}</Chat>
     </Container>
   );
