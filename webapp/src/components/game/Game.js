@@ -23,6 +23,10 @@ const Game = () => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
 
+  // Estado para manejar contador de preguntas respondidas correctamente
+  const [score, setScore] = useState(0);
+
+
   
   const getQuestion = async () => {
     try {      
@@ -57,7 +61,12 @@ const Game = () => {
   
   const handleOptionClick = (option) => {
     setSelectedAnswer(option); // Guarda la opción seleccionada
-    setIsCorrect(option === correctAnswer); // Verifica si es correcta
+    const correct = option === correctAnswer; // Verifica si es correcta
+    setIsCorrect(correct);
+
+    if (correct) {
+      setScore(prevScore => prevScore + 1); // Incrementa el puntaje si es correcto
+    }
 
     // Espera 2 segundos antes de cargar una nueva pregunta
     setTimeout(() => {
@@ -68,9 +77,14 @@ const Game = () => {
 
   return (
     <Container maxWidth="md" style={{ marginTop: '2rem' }}>
-      <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
-        {question}
-      </Typography>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Typography variant="h6" sx={{ marginLeft: '20px' }}>
+          {question}
+        </Typography>
+        <Typography variant="h6" sx={{ marginRight: '20px', color: 'blue' }}>
+          Puntuación: {score}
+        </Typography>
+      </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         {image && <img src={image} alt="Imagen de la pregunta" width="40%" height="auto" />}
       </div>
