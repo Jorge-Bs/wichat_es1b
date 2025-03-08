@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
-import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import axios from 'axios';
 import { BrowserRouter as Router } from "react-router-dom";
 import AddUser from './AddUser';
 
@@ -14,21 +14,23 @@ describe('AddUser component', () => {
 
   it('should add user successfully', async () => {
     render(
-      <Router>
-        <AddUser />
-      </Router>
+        <Router>
+          <AddUser />
+        </Router>
     );
 
     const usernameInput = screen.getByLabelText(/Username/i);
     const passwordInput = screen.getByLabelText(/Password/i);
+    const confirmPasswordInput = screen.getByLabelText(/Confirmar Contraseña/i);
     const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
 
     // Mock the axios.post request to simulate a successful response
-    mockAxios.onPost('http://localhost:8000/adduser').reply(200);
+    mockAxios.onPost('/adduser').reply(200);
 
     // Simulate user input
     fireEvent.change(usernameInput, { target: { value: 'testUser' } });
     fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+    fireEvent.change(confirmPasswordInput, { target: { value: 'testPassword' } });
 
     // Trigger the add user button click
     fireEvent.click(addUserButton);
@@ -41,21 +43,23 @@ describe('AddUser component', () => {
 
   it('should handle error when adding user', async () => {
     render(
-      <Router>
-        <AddUser />
-      </Router>
+        <Router>
+          <AddUser />
+        </Router>
     );
 
     const usernameInput = screen.getByLabelText(/Username/i);
     const passwordInput = screen.getByLabelText(/Password/i);
+    const confirmPasswordInput = screen.getByLabelText(/Confirmar Contraseña/i);
     const addUserButton = screen.getByRole('button', { name: /Crear usuario/i });
 
     // Mock the axios.post request to simulate an error response
-    mockAxios.onPost('http://localhost:8000/adduser').reply(500, { error: 'Internal Server Error' });
+    mockAxios.onPost('/adduser').reply(500, { error: 'Internal Server Error' });
 
     // Simulate user input
     fireEvent.change(usernameInput, { target: { value: 'testUser' } });
     fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+    fireEvent.change(confirmPasswordInput, { target: { value: 'testPassword' } });
 
     // Trigger the add user button click
     fireEvent.click(addUserButton);
