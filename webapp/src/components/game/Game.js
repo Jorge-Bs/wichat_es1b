@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { Container, Typography, Button, AppBar, Toolbar} from '@mui/material';
+import { Container, Typography, Button, AppBar, Toolbar, Paper} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import './Game.css';
@@ -18,6 +18,8 @@ const Game = () => {
   const [image, setImage] = useState('');
   const [options, setOptions] = useState([]);
   const [correctAnswer, setCorrectAnswer] = useState("");
+  const [questionCounter, setQuestionCounter] = useState(0);
+  const [isFinished, setFinished] = useState(false);
 
   // Estados para manejar la respuesta seleccionada y su corrección
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -26,10 +28,13 @@ const Game = () => {
   // Estado para manejar contador de preguntas respondidas correctamente
   const [score, setScore] = useState(0);
 
+  //Configuración de las partidas
+  const [numberOfQuestions, setNumberOfQuestions] = useState(5);
+  const [questionsToAnswer, setQuestionsToAnswer] = useState(5);
 
   
   const getQuestion = async () => {
-    try {      
+    try {
       const response = await axios.get(`${apiEndpoint}/generateQuestion`, { // una vez funcione 
         // params: {
         //   category: "Geografia",
@@ -48,8 +53,9 @@ const Game = () => {
       // Restablecer la respuesta seleccionada y los colores de los botones
       setSelectedAnswer(null);
       setIsCorrect(null);
+      setQuestionCounter(qc => qc + 1);
     } catch (error) {
-      console.log("Error: " );
+      console.log("Error en la generación de la pregunta");
     }
   }
 
@@ -68,18 +74,45 @@ const Game = () => {
       setScore(prevScore => prevScore + 1); // Incrementa el puntaje si es correcto
     }
 
-    // Espera 2 segundos antes de cargar una nueva pregunta
-    setTimeout(() => {
-      getQuestion();
-    }, 2000);
+    setQuestionsToAnswer(q => q - 1); // Disminuye el número de preguntas restantes
+
+    // Espera 2 segundos antes de cargar una nueva pregunta y comprueba si acabo la partida
+    if (!isGameFinished()) {
+      setTimeout(() => {
+        getQuestion();
+      }, 2000);
+    }
   };
+
+
 
   // Finalizar partida
   const handleEndGame = () => {
     //console.log("Partida finalizada");
     // Falta añadir lógica
   };
-  
+
+  const isGameFinished = () => {
+    return questionCounter >= numberOfQuestions;
+  }
+
+  // Comprueba cada pregunta si acabo la partida o no
+  useEffect(() => {
+    if (isGameFinished() && !isFinished) { 
+      setTimeout(() => {
+        setFinished(true);
+      }, 1000);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [questionsToAnswer]);
+
+  const handleHome = () => {
+    let path= '/Home';
+    navigate(path);
+  };
+
+
+
   // Iniciar nueva partida
   const handleNewGame = () => {
     console.log("Nueva partida iniciada");
@@ -95,52 +128,80 @@ const Game = () => {
 
   return (
     <Container maxWidth="md" style={{ marginTop: '2rem' }}>
-      <AppBar position="static" color="primary">
-        <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
+      {!isFinished && (
+      <Paper elevation={3} style={{ padding: '2rem', textAlign: 'center' }}>
+        <AppBar position="static" color="primary">
+          <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div>
+              <Button color="inherit" onClick={handleEndGame}>Finalizar partida</Button>
+              <Button color="inherit" onClick={handleNewGame}>Empezar nueva partida</Button>
+            </div>
+            <Button color="inherit" onClick={handleGoToProfile}>Ir al perfil</Button>
+          </Toolbar>
+        </AppBar>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '20px', marginBottom: '20px' }}>
+          <Typography variant="h6" sx={{ marginLeft: '20px' }}>
+            {question}
+          </Typography>
+          <Typography variant="h6" sx={{ marginRight: '20px', color: 'blue' }}>
+            Preguntas restantes: {questionsToAnswer}
+          </Typography>
+          <Typography variant="h6" sx={{ marginRight: '20px', color: 'blue' }}>
+            Puntuación: {score}
+          </Typography>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          {image && <img src={image} alt="Imagen de la pregunta" width="40%" height="auto" />}
+        </div>
+        <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(2, 1fr)', 
+            gap: '10px', 
+            alignItems: 'center', 
+            marginTop: '20px',
+            marginBottom: '20px'
+          }}>
+          {options.map((option, index) => (
+            <Button
+              key={index}
+              variant="contained"
+              onClick={() => handleOptionClick(option)}
+              style={{
+                backgroundColor: selectedAnswer === option 
+                  ? (isCorrect ? 'green' : 'red') 
+                  : (selectedAnswer !== null && option === correctAnswer ? 'green' : ''), // Si se falla, también se muestra cual era la correcta
+                color: selectedAnswer === option || (selectedAnswer !== null && option === correctAnswer) ? 'white' : 'black'
+              }}
+              disabled={selectedAnswer !== null} // Deshabilita los botones tras hacer clic
+            >
+              {option}
+            </Button>
+          ))}
+        </div>
+        <Chat>{correctAnswer}</Chat>
+      </Paper>
+      )}
+
+      {isFinished && (
+        <div>
+        <Paper elevation={3} style={{ padding: '2rem', textAlign: 'center' }}>
+          <Typography variant="h4" gutterBottom>
+            Partida finalizada. ¡Gracias por jugar!
+          </Typography>
           <div>
-            <Button color="inherit" onClick={handleEndGame}>Finalizar partida</Button>
-            <Button color="inherit" onClick={handleNewGame}>Empezar nueva partida</Button>
+            <Typography variant="h6" sx={{ marginRight: '20px', color: 'blue' }}>
+              Puntuación: {score}
+            </Typography>
           </div>
-          <Button color="inherit" onClick={handleGoToProfile}>Ir al perfil</Button>
-        </Toolbar>
-      </AppBar>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '20px', marginBottom: '20px' }}>
-        <Typography variant="h6" sx={{ marginLeft: '20px' }}>
-          {question}
-        </Typography>
-        <Typography variant="h6" sx={{ marginRight: '20px', color: 'blue' }}>
-          Puntuación: {score}
-        </Typography>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        {image && <img src={image} alt="Imagen de la pregunta" width="40%" height="auto" />}
-      </div>
-      <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(2, 1fr)', 
-          gap: '10px', 
-          alignItems: 'center', 
-          marginTop: '20px',
-          marginBottom: '20px'
-        }}>
-        {options.map((option, index) => (
-          <Button
-            key={index}
-            variant="contained"
-            onClick={() => handleOptionClick(option)}
-            style={{
-              backgroundColor: selectedAnswer === option 
-                ? (isCorrect ? 'green' : 'red') 
-                : (selectedAnswer !== null && option === correctAnswer ? 'green' : ''), // Si se falla, también se muestra cual era la correcta
-              color: selectedAnswer === option || (selectedAnswer !== null && option === correctAnswer) ? 'white' : 'black'
-            }}
-            disabled={selectedAnswer !== null} // Deshabilita los botones tras hacer clic
-          >
-            {option}
-          </Button>
-        ))}
-      </div>
-      <Chat>{correctAnswer}</Chat>
+        </Paper>
+
+        <div>
+          <Button onClick={handleHome} variant="contained" sx={{ marginTop: '20px', color: 'white' }}>
+          Volver al menú principal</Button>
+        </div>
+        </div>
+      )}
+
     </Container>
   );
 
