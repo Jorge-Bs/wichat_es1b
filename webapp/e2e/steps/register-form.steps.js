@@ -38,7 +38,7 @@ defineFeature(feature, test => {
       await expect(page).toFill('input[name="username"]', username);
       await expect(page).toFill('input[name="password"]', password);
       await expect(page).toFill('input[name="confirmPassword"]', password);
-      await expect(page).toClick('button', { text: 'Crear Usuario' })
+      await expect(page).toClick('button', { text: 'Crear usuario' })
     });
 
     then('A confirmation message should be shown in the screen', async () => {
