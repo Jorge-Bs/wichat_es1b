@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 import React, { useState } from "react";
 import ChatBot from "react-chatbotify";
 import settings from "./chatSettings"
