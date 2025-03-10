@@ -32,6 +32,13 @@
       "react-app/jest"
     ]
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|svg|webp|png)$": "<rootDir>/src/__mocks__/fileMock.js",
+      "^src/components/chatbot/chatSettings$": "<rootDir>/src/__mocks__/chatSettings.js",
+      "^.+\\.png\\?react$": "<rootDir>/src/__mocks__/chat.png"
+    }
+  },
   "browserslist": {
     "production": [
       ">0.2%",
