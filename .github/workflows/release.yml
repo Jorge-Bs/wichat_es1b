@@ -129,6 +129,8 @@ jobs:
       packages: write
     needs: [e2e-tests]
     steps:
+    - name: Set up .env file
+      run: echo "API_KEY=${{ secrets.API_KEY }}" >> .env
     - uses: actions/checkout@v4
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@v5
