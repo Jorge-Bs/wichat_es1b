@@ -59,5 +59,6 @@ async function configure(message) {
         });
     } catch (error) {
         console.error("Error fetching message:", error);
+        return "Error fetching message";
     }
 }
