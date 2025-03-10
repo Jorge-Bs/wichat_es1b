@@ -4,7 +4,7 @@ import ChatBot from "react-chatbotify";
 import settings from "./chatSettings"
 import axios from 'axios';
 
-const URL = "40.113.105.107";
+const apiEndpoint = process.env.REACT_APP_LLM_ENDPOINT || 'http://localhost:8000';
 
 
 export default function Chat(props) {
@@ -43,7 +43,7 @@ export default function Chat(props) {
 
 async function getMessage(message) {
     try {
-        const response = await axios.post('http://' + URL + ':8003/ask', {
+        const response = await axios.post(apiEndpoint+'/ask', {
             question: message,
             apiKey: process.env.REACT_APP_LLM_API_KEY
         });
@@ -56,7 +56,7 @@ async function getMessage(message) {
 
 async function configure(message) {
     try {
-        await axios.post('http://' + URL + ':8003/configureAssistant', {
+        await axios.post(apiEndpoint+'/configureAssistant', {
             moderation: message,
         });
     } catch (error) {
