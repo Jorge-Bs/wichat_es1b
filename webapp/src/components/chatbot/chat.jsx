@@ -4,7 +4,7 @@ import ChatBot from "react-chatbotify";
 import settings from "./chatSettings"
 import axios from 'axios';
 
-const apiEndpoint = process.env.REACT_APP_LLM_ENDPOINT || 'http://localhost:8000';
+const apiEndpoint = process.env.REACT_APP_LLM_ENDPOINT || 'http://localhost:8003';
 
 
 export default function Chat(props) {
