@@ -23,7 +23,7 @@ jobs:
     - run: npm --prefix users/userservice test -- --coverage
     - run: npm --prefix llmservice test -- --coverage
     - run: npm --prefix gatewayservice test -- --coverage
-    - run: CI=false npm --prefix webapp test -- --coverage
+    - run: npm --prefix webapp test -- --coverage
     - name: Analyze with SonarCloud
       uses: SonarSource/sonarqube-scan-action@master
       env:
@@ -40,9 +40,9 @@ jobs:
     - run: npm --prefix users/userservice install
     - run: npm --prefix llmservice install
     - run: npm --prefix gatewayservice install
-    - run: npm --prefix webapp install
-    - run: npm --prefix webapp run build
-    - run: npm --prefix webapp run test:e2e
+    - run: CI=false npm --prefix webapp install
+    - run: CI=false npm --prefix webapp run build
+    - run: CI=false npm --prefix webapp run test:e2e
   docker-push-webapp:
     name: Push webapp Docker Image to GitHub Packages
     runs-on: ubuntu-latest
