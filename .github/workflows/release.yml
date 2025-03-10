@@ -58,6 +58,7 @@ jobs:
       uses: elgohr/Publish-Docker-Github-Action@v5
       env:
         API_URI: http://${{ secrets.DEPLOY_HOST }}:8000
+        LLM_URI: http://${{ secrets.DEPLOY_HOST }}:8003
         LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
       with:
           name: arquisoft/wichat_es1b/webapp
