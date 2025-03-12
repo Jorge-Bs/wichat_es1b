@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
 import { Typewriter } from "react-simple-typewriter";
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -15,6 +16,8 @@ const Login = () => {
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
   const apiKey = process.env.REACT_APP_LLM_API_KEY || 'None';
+  
+  const navigate = useNavigate();
 
   const loginUser = async () => {
     try {
@@ -37,8 +40,9 @@ const Login = () => {
       setLoginSuccess(true);
 
       setOpenSnackbar(true);
+      navigate("/Home");
     } catch (error) {
-      setError(error.response.data.error);
+      setError('Credenciales inválidas');
     }
   };
 
@@ -57,13 +61,13 @@ const Login = () => {
             typeSpeed={50} // Typing speed in ms
           />
           <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
-            Your account was created on {new Date(createdAt).toLocaleDateString()}.
+            Tu cuenta ha sido creada a las {new Date(createdAt).toLocaleDateString()}.
           </Typography>
         </div>
       ) : (
         <div>
           <Typography component="h1" variant="h5">
-            Login
+            Iniciar sesión
           </Typography>
           <TextField
             margin="normal"
@@ -81,9 +85,9 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button variant="contained" color="primary" onClick={loginUser}>
-            Login
+            Iniciar sesión
           </Button>
-          <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="Login successful" />
+          <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="Inicio de sesión exitoso" />
           {error && (
             <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />
           )}

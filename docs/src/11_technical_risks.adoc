@@ -1,27 +1,26 @@
 ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-technical-risks]]
-== Risks and Technical Debts
+== Riesgos y Deuda Técnica
 
+=== Riesgos
 
-ifdef::arc42help[]
-[role="arc42help"]
-****
-.Contents
-A list of identified technical risks or technical debts, ordered by priority
+[options="header",cols="2,2,1"]
+|===
+| Riesgo | Descripción | Prioridad
+| Dependencia de Wikidata | Si la API de Wikidata falla o se vuelve inestable, la generación de preguntas podría paralizarse y verse afectado el sistema. | Alta
+| Generación incorrecta de pistas | Las "alucinaciones" del modelo de lenguaje pueden generar pistas confusas en el chatbot, afectando a la experiencia del usuario. | Alta
+| Rendimiento y escalabilidad | Los tiempos de respuesta y la capacidad para manejar múltiples usuarios simultáneos podrían verse afectados en caso de que el sistema no esté bien optimizado. | Alta
+| Seguridad | Si el sistema de registro y la API no están bien protegidos, podría haber riesgos de acceso no autorizado a datos sensibles de los usuarios. | Alta
+| Falta de pruebas | Si no se implementan las pruebas adecuadas entre el frontend, backend y la API externa, podrían surgir errores no detectados. | Media
+| Desactualización de datos | Si los datos de Wikidata no se actualizan regularmente, las preguntas podrían volverse confusas o imprecisas con el tiempo. | Baja
+| ... | ... | ...
+|===
 
-.Motivation
-“Risk management is project management for grown-ups” (Tim Lister, Atlantic Systems Guild.) 
+=== Deuda Técnica
 
-This should be your motto for systematic detection and evaluation of risks and technical debts in the architecture, which will be needed by management stakeholders (e.g. project managers, product owners) as part of the overall risk analysis and measurement planning.
-
-.Form
-List of risks and/or technical debts, probably including suggested measures to minimize, mitigate or avoid risks or reduce technical debts.
-
-
-.Further Information
-
-See https://docs.arc42.org/section-11/[Risks and Technical Debt] in the arc42 documentation.
-
-****
-endif::arc42help[]
+[options="header",cols="2,2"]
+|===
+| Deuda Técnica | Descripción 
+| ... | ... 
+|===

@@ -1,9 +1,11 @@
 ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-introduction-and-goals]]
+
 == Introducción y Objetivos
 
 El proyecto WIChat es una iniciativa llevada a cabo en la Universidad de Oviedo, bajo la solicitud de la empresa de desarrollo de software ChattySW y contratada por RTVE, con el propósito de desarrollar una versión online del concurso de preguntas y respuestas "Saber y Ganar".
+
 El equipo comprometido con este desarrollo está formado por:
 
 * Bruno Isla Sierra
@@ -13,110 +15,38 @@ El equipo comprometido con este desarrollo está formado por:
 * Pablo Urones Clavera
 
 En la aplicación, los usuarios podrán registrarse y participar en un juego de preguntas.
-Dicho juego consistirá en que la aplicación mostrará una imagen y los jugadores deberan adivinar preguntas sobre el lugar representado. Como novedad de la aplicación, se ofrecerá la posibilidad de obtener pistas sobre la imagen mediante una conversación con un chatbot.
+Dicho juego consistirá en que la aplicación mostrará una imagen y los jugadores deberán adivinar preguntas sobre el lugar representado. Como novedad de la aplicación, se ofrecerá la posibilidad de obtener pistas sobre la imagen mediante una conversación con un chatbot.
 
-ifdef::arc42help[]
-[role="arc42help"]
-****
-Describes the relevant requirements and the driving forces that software architects and development team must consider. 
-These include
-
-* underlying business goals, 
-* essential features, 
-* essential functional requirements, 
-* quality goals for the architecture and
-* relevant stakeholders and their expectations
-****
-endif::arc42help[]
 
 === Descripción de los requisitos
 
-* Los ususarios deberán registrarse en la aplicación para jugar, o bien iniciar sesión en una cuenta ya existente.
+* Los usuarios deberán registrarse en la aplicación para jugar, o bien iniciar sesión en una cuenta ya existente.
 * Los usuarios registrados podrán acceder a un historial de su participación.
 * La información de las preguntas será generada por el sistema automáticamente basándose en datos extraídos de Wikidata.
-* Cada una de las preguntas tendra 4 respuestas posibles, siendo solo una respuesta correcta y el resto distractoras o incorrectas.
-* Los ususarios contarán con un plazo de tiempo determinado para responder las preguntas.
+* Cada una de las preguntas tendrá 4 respuestas posibles, siendo solo una respuesta correcta y el resto distractoras o incorrectas.
+* Los usuarios contarán con un plazo de tiempo determinado para responder las preguntas.
 
 
-ifdef::arc42help[]
-[role="arc42help"]
-****
-.Contents
-Short description of the functional requirements, driving forces, extract (or abstract)
-of requirements. Link to (hopefully existing) requirements documents
-(with version number and information where to find it).
+=== Objetivos de calidad
 
-.Motivation
-From the point of view of the end users a system is created or modified to
-improve support of a business activity and/or improve the quality.
-
-.Form
-Short textual description, probably in tabular use-case format.
-If requirements documents exist this overview should refer to these documents.
-
-Keep these excerpts as short as possible. Balance readability of this document with potential redundancy w.r.t to requirements documents.
+[options="header",cols="1,1"]
+|===
+|Objetivo de calidad| Descripción
+| **Rendimiento** | Se buscará que los tiempos de espera de la aplicación sean reducidos, para que el usuario pueda disfrutar de una experiencia fluida y con las mínimas interrupciones posibles.
+| **Testeabilidad** | Nuestra aplicación podrá ser testeable, es decir, estará sometida a una serie de pruebas que realizaremos para garantizar el correcto funcionamiento del sistema. También nos ayudará a identificar errores y solucionarlos.
+| **Usabilidad** | La aplicación deberá ser intuitiva y fácil de usar, para que cualquier usuario pueda disfrutar de la experiencia sin necesidad de instrucciones previas. El ojetivo es que el usuario pueda navegar sin dificultades y se sienta cómodo en la aplicación.
+| **Mantenibilidad** | Se tratará de cuidar la arquitectura de la aplicación para futuras nuevas implementaciones, modificaciones o correcciones. Se buscará que el código sea limpio y fácil de entender, para que cualquier miembro del equipo pueda trabajar en él. También se revisará periódicamente la documentación para mantenerla actualizada.
+|===
 
 
-.Further Information
-
-See https://docs.arc42.org/section-1/[Introduction and Goals] in the arc42 documentation.
-
-****
-endif::arc42help[]
-
-=== Quality Goals
-
-ifdef::arc42help[]
-[role="arc42help"]
-****
-.Contents
-The top three (max five) quality goals for the architecture whose fulfillment is of highest importance to the major stakeholders. 
-We really mean quality goals for the architecture. Don't confuse them with project goals.
-They are not necessarily identical.
-
-Consider this overview of potential topics (based upon the ISO 25010 standard):
-
-image::01_2_iso-25010-topics-EN.drawio.png["Categories of Quality Requirements"]
-
-.Motivation
-You should know the quality goals of your most important stakeholders, since they will influence fundamental architectural decisions. 
-Make sure to be very concrete about these qualities, avoid buzzwords.
-If you as an architect do not know how the quality of your work will be judged...
-
-.Form
-A table with quality goals and concrete scenarios, ordered by priorities
-****
-endif::arc42help[]
-
-=== Partes interesadas(Stakeholders)
-
-ifdef::arc42help[]
-[role="arc42help"]
-****
-.Contents
-Explicit overview of stakeholders of the system, i.e. all person, roles or organizations that
-
-* should know the architecture
-* have to be convinced of the architecture
-* have to work with the architecture or with code
-* need the documentation of the architecture for their work
-* have to come up with decisions about the system or its development
-
-.Motivation
-You should know all parties involved in development of the system or affected by the system.
-Otherwise, you may get nasty surprises later in the development process.
-These stakeholders determine the extent and the level of detail of your work and its results.
-
-.Form
-Table with role names, person names, and their expectations with respect to the architecture and its documentation.
-****
-endif::arc42help[]
+=== Partes interesadas (Stakeholders)
 
 [options="header",cols="1,2,2"]
 |===
 |Rol/Nombre|Contacto|Expectativas
-| Equipo de desarrollo (Estudiantes) | Bruno Isla Sierra, Guillermo Villacorta Moros, Jorge Blanco Sánchez, Marcelo Díez Domínguez, Pablo Urones CLavera | Desarrollar un sistema de preguntas y respuestas, mejorando sus habilidades de programación, desarrollo y trabajo en equipo.
+| Equipo de desarrollo (Estudiantes) | Bruno Isla Sierra, Guillermo Villacorta Moro, Jorge Blanco Sánchez, Marcelo Díez Domínguez, Pablo Urones Clavera | Desarrollar un sistema de preguntas y respuestas, mejorando sus habilidades de programación, desarrollo y trabajo en equipo.
 | Usuarios | Cualquier usuario de la aplicación | Participar en una aplicación intuitiva y fácil de usar/entender.
 | Profesores | Jose Emilio Labra Gayo, Pablo González, Irene Cid Rico | Evaluar el resultado final de la aplicación, además de ayudar a los estudiantes con el desarrollo de la aplicación.
 | RTVE | Radiotelevisión Española | Cumplimiento de los requisitos establecidos para presentar la aplicación a sus espectadores.
 |===
+

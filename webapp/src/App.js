@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import AddUser from './components/AddUser';
-import Login from './components/Login';
+import AddUser from './components/register/AddUser';
+import Login from './components/login/Login';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -17,17 +17,17 @@ function App() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
-        Welcome to the 2025 edition of the Software Architecture course
+          ¡Te damos la bienvenida a Wichat! ¡Esperamos que disfrutes!
       </Typography>
       {showLogin ? <Login /> : <AddUser />}
       <Typography component="div" align="center" sx={{ marginTop: 2 }}>
         {showLogin ? (
           <Link name="gotoregister" component="button" variant="body2" onClick={handleToggleView}>
-            Don't have an account? Register here.
+            ¿No tienes una cuenta? Regístrate aquí.
           </Link>
         ) : (
           <Link component="button" variant="body2" onClick={handleToggleView}>
-            Already have an account? Login here.
+            ¿Ya tienes una cuenta? Inicia sesión aquí.
           </Link>
         )}
       </Typography>

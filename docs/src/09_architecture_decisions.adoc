@@ -1,7 +1,31 @@
 ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-design-decisions]]
-== Architecture Decisions
+== Decisiones arquitectónicas
+
+En este apartado se tratarán de justificar las decisiones relacionadas con la arquitectura de la aplicación, de
+una forma en la que se pueda comprender el porqué de cada una de ellas desde el punto de vista de cualquier usuario.
+
+[cols="1,2"]
+|===
+|*Decisión*|*Justificación*
+|_Git para el control de versiones_ | Escogemos Git como sistema de control de versiones por ser la principal opción en el mercado y por ser un sistema
+de control de versiones distribuido, lo que nos permite trabajar de forma más eficiente y simple.
+|_GitHub para gestión de código compartido en la nube_ | Se trata del servicio Git basado en la nube más popular y con más funcionalidades, lo que nos permite tener un control total
+sobre los cambios de nuestra aplicación, además de tener la seguridad de que no vamos a perder ni una línea de código, aunque esta se sobreescriba en algún momento.
+|_Utilización de JavaScript_ | La mayor parte de integrantes del grupo tiene experiencia previa en este lenguaje, por lo que se conoce la versatilidad
+y utilidad de este lenguaje para el desarrollo de aplicaciones web.
+|_BD con MongoDB_ | Es una de las principales soluciones del mercado, y ha sido elegida por su facilidad de uso y por la previa experiencia
+de alguno de los componentes con esta base de datos.
+|_Despliegue con Node.js_ | Se ha escogido por ser un entorno de ejecución para JavaScript en el servidor, con alto rendimiento y velocidad, ideal para aplicaciones web en tiempo real
+como la que nos concierne.
+|_Desarrollo con React_ | Se ha escogido por ser una de las opciones más populares a la hora de desarrollar JavaScript con interfaces de usuario.
+|_Wikidata para la obtención de información_ | Esta era una opción clara por ser una base de datos libre, colaborativa y multilingüe, con la que conseguir la información para
+las diferentes preguntas será muy sencillo.
+|_Uso de la LLM de Empathy_ | Se utilizará la LLM de Empathy para poder generar respuestas en tiempo real con el chatbot de inteligencia artificial que
+se implementará en la aplicación.
+|===
+
 
 
 ifdef::arc42help[]
@@ -9,7 +33,7 @@ ifdef::arc42help[]
 ****
 .Contents
 Important, expensive, large scale or risky architecture decisions including rationales.
-With "decisions" we mean selecting one alternative based on given criteria.
+With "decisions," we mean selecting one alternative based on given criteria.
 
 Please use your judgement to decide whether an architectural decision should be documented
 here in this central section or whether you better document it locally

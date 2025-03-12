@@ -2,5 +2,10 @@ node_modules
 coverage
 docs/build
 .env
+
+webapp/.env.DS_Store
 webapp/.env
+llmservice/.env
+
 /.idea
+.idea
