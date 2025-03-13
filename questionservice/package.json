@@ -5,7 +5,8 @@
     "main": "question-service.js",
     "scripts": {
         "start": "node question-service.js",
-        "test": "jest"
+        "test": "jest",
+        "build": "npm run start"
     },
     "repository": {
         "type": "git",
