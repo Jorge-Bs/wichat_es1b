@@ -7,7 +7,13 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:webapp": "cd webapp && npm install && npm run build",
+    "build:llmservice": "cd llmservice && npm install && npm run build",
+    "build:gatewayservice": "cd gatewayservice && npm install && npm run build",
+    "build:authservice": "cd users/authservice && npm install && npm run build",
+    "build:userservice": "cd users/userservice && npm install && npm run build",
+    "build": "npm run build:webapp && npm run build:llmservice && npm run build:gatewayservice && npm run build:authservice && npm run build:userservice" 
   },
   "repository": {
     "type": "git",
